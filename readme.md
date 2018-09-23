@@ -1,0 +1,1 @@
+Serialisation annotations for TypeScript
