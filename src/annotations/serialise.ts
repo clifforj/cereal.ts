@@ -1,6 +1,6 @@
-import {SerialisationMetaStoreInstance} from '../meta/serialisation-meta-store';
 import {Constructor} from '../util/constructor';
 import {CustomSerialiser} from '../util/custom-serialiser';
+import {Cereal} from '..';
 
 // tslint:disable-next-line:no-any
 export function Serialise(
@@ -8,11 +8,11 @@ export function Serialise(
     (object: {}, propertyName: string) => void {
   return (object: {}, propertyName: string) => {
     const propertySerialisationMeta =
-        SerialisationMetaStoreInstance.getMetaGroup(object.constructor)
+        Cereal.metaStore.getClass(object.constructor)
             .getItemGroup(propertyName)
             .getSerialisationMeta();
 
     propertySerialisationMeta.propertyNameOverride = propertyNameOverride;
-    propertySerialisationMeta.type = type;
+    propertySerialisationMeta.target = type;
   };
 }

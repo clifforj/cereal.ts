@@ -1,37 +1,17 @@
-import {SerialisationMetaGroup} from './serialisation-meta-group';
+import {SerialisationClass} from './serialisation-class';
 
 export class SerialisationMetaStore {
-  store: Map<Function, SerialisationMetaGroup> =
-      new Map<Function, SerialisationMetaGroup>();
+  store: Map<Function, SerialisationClass> =
+      new Map<Function, SerialisationClass>();
 
-  getMetaGroup(groupClass: Function): SerialisationMetaGroup {
+  getClass(groupClass: Function): SerialisationClass {
     let result = this.store.get(groupClass);
 
     if (!result) {
-      result = new SerialisationMetaGroup();
+      result = new SerialisationClass();
       this.store.set(groupClass, result);
     }
 
     return result;
   }
-
-  logContents() {
-    this.store.forEach((group, classRef) => {
-      console.log(`${classRef.name}`);
-      group.items.forEach((itemGroup, key) => {
-        console.log(`- ${itemGroup.propertyName}`);
-        console.log('-  SERIALISATION');
-        console.log(`-    Override: ${
-            itemGroup.getSerialisationMeta().propertyNameOverride}`);
-        console.log(`-    Type: ${itemGroup.getSerialisationMeta().type}`);
-        console.log('-  DESERIALISATION');
-        console.log(`-    Override: ${
-            itemGroup.getDeserialisationMeta().propertyNameOverride}`);
-        console.log(`-    Type: ${itemGroup.getDeserialisationMeta().type}`);
-      });
-      console.log();
-    });
-  }
 }
-// tslint:disable-next-line:variable-name
-export const SerialisationMetaStoreInstance = new SerialisationMetaStore();
