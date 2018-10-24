@@ -1,15 +1,15 @@
 import {Constructor} from '../util/constructor';
-import {CustomSerialiser} from '../util/custom-serialiser';
+import {ICustomSerialiser} from '../util/custom-serialiser.interface';
 import {Cereal} from '..';
 
 // tslint:disable-next-line:no-any
 export function Serialise(
-    propertyNameOverride?: string, type?: Constructor<any>|CustomSerialiser):
+    propertyNameOverride?: string, type?: Constructor<any>|ICustomSerialiser):
     (object: {}, propertyName: string) => void {
   return (object: {}, propertyName: string) => {
     const propertySerialisationMeta =
         Cereal.metaStore.getClass(object.constructor)
-            .getItemGroup(propertyName)
+            .getProperty(propertyName)
             .getSerialisationMeta();
 
     propertySerialisationMeta.propertyNameOverride = propertyNameOverride;

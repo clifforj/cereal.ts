@@ -4,7 +4,7 @@ export class SerialisationClass {
   properties: Map<string, SerialisationProperty> =
       new Map<string, SerialisationProperty>();
 
-  getItemGroup(propertyName: string): SerialisationProperty {
+  getProperty(propertyName: string): SerialisationProperty {
     let result = this.properties.get(propertyName);
 
     if (!result) {
