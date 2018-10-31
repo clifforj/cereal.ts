@@ -1,8 +1,8 @@
-import {SerialisationService} from "./service/serialisation-service";
+import {SerializationService} from "./service/serialization-service";
 
-export {Deserialise} from './annotations/deserialise';
-export {Serialise} from './annotations/serialise';
-export {SerialiseDeserialise} from './annotations/serialise-deserialise';
+export {Deserialize} from './annotations/deserialize';
+export {Serialize} from './annotations/serialize';
+export {SerializeDeserialize} from './annotations/serialize-deserialize';
 
 // tslint:disable-next-line:variable-name
-export const Cereal = new SerialisationService();
+export const Cereal = new SerializationService();

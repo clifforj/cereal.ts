@@ -1,10 +1,10 @@
 import 'mocha';
-import {Serialise, Cereal} from '../../';
+import {Serialize, Cereal} from '../../';
 import {expect} from 'chai';
 
 class Person {
-    @Serialise('first_name') firstName: string;
-    @Serialise('last_name') lastName: string;
+    @Serialize('first_name') firstName: string;
+    @Serialize('last_name') lastName: string;
 
     constructor(firstName: string, lastName: string) {
         this.firstName = firstName;
@@ -12,11 +12,11 @@ class Person {
     }
 }
 
-describe('Renamed Property Serialisation', () => {
+describe('Renamed Property Serialization', () => {
     const bruce = new Person('Bruce', 'Bogtrotter');
 
-    it('should serialise based on given class', () => {
-        const serialBruce = Cereal.serialise(bruce, Person);
+    it('should serialize based on given class', () => {
+        const serialBruce = Cereal.serialize(bruce, Person);
 
         expect(serialBruce).to.not.equal(bruce);
         expect(serialBruce['first_name']).to.equal('Bruce');

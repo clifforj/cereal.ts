@@ -1,10 +1,10 @@
 import 'mocha';
-import {Deserialise, Cereal} from '../../';
+import {Deserialize, Cereal} from '../../';
 import {expect} from 'chai';
 
 class Person {
-    @Deserialise() firstName: string;
-    @Deserialise() lastName: string;
+    @Deserialize() firstName: string;
+    @Deserialize() lastName: string;
 
     constructor(firstName: string, lastName: string) {
         this.firstName = firstName;
@@ -16,11 +16,11 @@ class Person {
     }
 }
 
-describe('Simple Deserialisation', () => {
+describe('Simple Deserialization', () => {
     const bruce = new Person('Bruce', 'Bogtrotter');
 
-    it('should deserialise based on given class', () => {
-        const deserialBruce = Cereal.deserialise(bruce, Person) as Person;
+    it('should deserialize based on given class', () => {
+        const deserialBruce = Cereal.deserialize(bruce, Person) as Person;
 
         expect(deserialBruce).to.not.equal(bruce);
         expect(deserialBruce.firstName).to.equal('Bruce');
@@ -29,7 +29,7 @@ describe('Simple Deserialisation', () => {
     });
 
     it('should just return passed object when no target given', () => {
-        const deserialBruce = Cereal.deserialise(bruce);
+        const deserialBruce = Cereal.deserialize(bruce);
 
         expect(deserialBruce).to.equal(bruce);
     });

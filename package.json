@@ -10,7 +10,7 @@
   "license": "MIT",
   "keywords": [],
   "scripts": {
-    "test": "mocha -r ts-node/register src/**/*.spec.ts",
+    "test": "nyc --reporter=html mocha -r ts-node/register src/**/*.spec.ts",
     "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
@@ -25,7 +25,30 @@
     "jsdom": "^12.0.0",
     "jsdom-global": "^3.0.2",
     "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
     "ts-node": "^7.0.1",
     "typescript": "~2.8.0"
+  },
+  "nyc": {
+    "exclude": [
+      "src/test/**/*.ts"
+    ],
+    "include": [
+      "src/**/*.ts",
+      "src/**/*.tsx"
+    ],
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "text-summary",
+      "html"
+    ],
+    "sourceMap": true,
+    "instrument": true
   }
 }

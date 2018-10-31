@@ -1,1 +1,1 @@
-Serialisation annotations for TypeScript
+Serialization annotations for TypeScript

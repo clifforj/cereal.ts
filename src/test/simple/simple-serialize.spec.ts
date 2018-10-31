@@ -1,10 +1,10 @@
 import 'mocha';
-import {Serialise, Cereal} from '../../';
+import {Serialize, Cereal} from '../../';
 import {expect} from 'chai';
 
 class Person {
-    @Serialise() firstName: string;
-    @Serialise() lastName: string;
+    @Serialize() firstName: string;
+    @Serialize() lastName: string;
     age: number;
 
     constructor(firstName: string, lastName: string, age: number) {
@@ -14,11 +14,11 @@ class Person {
     }
 }
 
-describe('Simple Serialisation', () => {
+describe('Simple Serialization', () => {
     const bruce = new Person('Bruce', 'Bogtrotter', 10);
 
-    it('should serialise based on given class', () => {
-        const serialBruce = Cereal.serialise(bruce, Person);
+    it('should serialize based on given class', () => {
+        const serialBruce = Cereal.serialize(bruce, Person);
 
         expect(serialBruce).to.not.equal(bruce);
         expect(serialBruce.firstName).to.equal('Bruce');
@@ -27,7 +27,7 @@ describe('Simple Serialisation', () => {
     });
 
     it('should just return passed object when no target given', () => {
-        const serialBruce = Cereal.serialise(bruce);
+        const serialBruce = Cereal.serialize(bruce);
 
         expect(serialBruce).to.equal(bruce);
     });

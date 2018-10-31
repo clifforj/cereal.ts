@@ -1,24 +1,24 @@
 import 'mocha';
-import {Deserialise, Cereal} from '../../';
+import {Deserialize, Cereal} from '../../';
 import {expect} from 'chai';
 
 class Person {
-    @Deserialise('first_name') firstName: string;
-    @Deserialise('last_name') lastName: string;
+    @Deserialize('first_name') firstName: string;
+    @Deserialize('last_name') lastName: string;
 
     getFullName() {
         return `${this.firstName} ${this.lastName}`;
     }
 }
 
-describe('Renamed Property Deserialisation', () => {
+describe('Renamed Property Deserialization', () => {
     const bruce = {
         'first_name': 'Bruce',
         'last_name': 'Bogtrotter'
     };
 
-    it('should deserialise based on given class', () => {
-        const deserialBruce = Cereal.deserialise(bruce, Person) as Person;
+    it('should deserialize based on given class', () => {
+        const deserialBruce = Cereal.deserialize(bruce, Person) as Person;
 
         expect(deserialBruce.firstName).to.equal('Bruce');
         expect(deserialBruce.lastName).to.equal('Bogtrotter');

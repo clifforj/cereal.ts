@@ -1,10 +1,10 @@
 import 'mocha';
-import {Serialise, Cereal} from '../../';
+import {Serialize, Cereal} from '../../';
 import {expect} from 'chai';
 
 class Name {
-    @Serialise('first_name') firstName: string;
-    @Serialise('last_name') lastName: string;
+    @Serialize('first_name') firstName: string;
+    @Serialize('last_name') lastName: string;
 
     constructor(firstName: string, lastName: string) {
         this.firstName = firstName;
@@ -13,7 +13,7 @@ class Name {
 }
 
 class Pet {
-    @Serialise(null, Name) name: Name;
+    @Serialize(null, Name) name: Name;
     colour: string;
 
     constructor(name: Name, colour: string) {
@@ -23,8 +23,8 @@ class Pet {
 }
 
 class Person {
-    @Serialise(null, Name) name: Name;
-    @Serialise(null, Pet) pet: Pet;
+    @Serialize(null, Name) name: Name;
+    @Serialize(null, Pet) pet: Pet;
 
     constructor(name: Name, pet: Pet) {
         this.name = name;
@@ -32,15 +32,15 @@ class Person {
     }
 }
 
-describe('Nested Object Serialisation', () => {
+describe('Nested Object Serialization', () => {
     const bruceName = new Name('Bruce', 'Bogtrotter');
     const percyName = new Name('Percy', 'Paws');
 
     const percy = new Pet(percyName, 'brown');
     const bruce = new Person(bruceName, percy);
 
-    it('should serialise structure based on applied classes', () => {
-        const serialBruce = Cereal.serialise(bruce, Person);
+    it('should serialize structure based on applied classes', () => {
+        const serialBruce = Cereal.serialize(bruce, Person);
 
         expect(serialBruce).to.not.equal(bruce);
         expect(serialBruce.name).to.not.equal(bruceName);
