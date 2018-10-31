@@ -10,6 +10,7 @@ import {SerializationMetaStore} from "../meta/serialization-meta-store";
 export class SerializationService {
     metaStore: SerializationMetaStore = new SerializationMetaStore();
 
+    supportCircularReferences: boolean = true;
     idProperty: string = '@id';
 
     // tslint:disable-next-line:no-any
@@ -69,15 +70,17 @@ export class SerializationService {
                 }
             } else {
                 // Check if we've already serialized this object. If we have, then output the objects ID instead
-                if (this.serialisationIdMap.has(object)) {
+                if (this.serialisationIdMap.has(object) && this.supportCircularReferences) {
                     serializedObject = this.serialisationIdMap.get(object);
 
                 // This is the first time we've encountered this object, serialise it and add it to the map with an ID
                 } else {
                     serializedObject = {};
 
-                    this.serialisationIdMap.set(object, ++this.serialisationId);
-                    serializedObject[this.idProperty] = this.serialisationId;
+                    if (this.supportCircularReferences) {
+                        this.serialisationIdMap.set(object, ++this.serialisationId);
+                        serializedObject[this.idProperty] = this.serialisationId;
+                    }
 
                     SerializationService.callLifeCycleHook(serializedObject, object, target, true, false);
                     const classMeta = this.metaStore.getClass(target);
@@ -132,14 +135,19 @@ export class SerializationService {
                 }
             } else {
                 // If the passed value is a number when we're expecting to deserialise an object, it's likely an ID
-                if (!isNaN(object) && this.deserialisationIdMap.has(object)) {
-                    // TODO IMPLEMENT DESERIALIZING CIRCULAR REFERENCES
+                if (!isNaN(object) && this.deserialisationIdMap.has(object) && this.supportCircularReferences) {
+                    deserializedObject = this.deserialisationIdMap.get(object);
                 } else {
                     // tslint:disable-next-line:no-any
                     target = target as Constructor<any>;
                     const classMeta = this.metaStore.getClass(target);
 
                     deserializedObject = new target();
+
+                    if (this.supportCircularReferences) {
+                        this.deserialisationIdMap.set(object[this.idProperty], deserializedObject);
+                    }
+
                     SerializationService.callLifeCycleHook(deserializedObject, object, target, false, false);
                     classMeta.properties.forEach((propMeta) => {
                         const deserializationMeta = propMeta.getDeserializationMeta();
