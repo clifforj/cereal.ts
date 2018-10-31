@@ -11,6 +11,7 @@
   "keywords": [],
   "scripts": {
     "test": "nyc --reporter=html mocha -r ts-node/register src/**/*.spec.ts",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
@@ -21,6 +22,7 @@
     "@types/chai": "^4.1.4",
     "@types/mocha": "^5.2.5",
     "chai": "^4.1.2",
+    "coveralls": "^3.0.2",
     "gts": "^0.8.0",
     "jsdom": "^12.0.0",
     "jsdom-global": "^3.0.2",

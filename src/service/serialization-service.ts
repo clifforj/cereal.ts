@@ -10,12 +10,12 @@ import {SerializationMetaStore} from "../meta/serialization-meta-store";
 export class SerializationService {
     metaStore: SerializationMetaStore = new SerializationMetaStore();
 
-    supportCircularReferences: boolean = true;
-    idProperty: string = '@id';
+    supportCircularReferences = true;
+    idProperty = '@id';
 
     // tslint:disable-next-line:no-any
     serialisationIdMap: Map<any, number> = new Map<any, number>();
-    serialisationId: number = 0;
+    serialisationId = 0;
 
     // tslint:disable-next-line:no-any
     deserialisationIdMap: Map<number, any> = new Map<number, any>();
@@ -66,7 +66,7 @@ export class SerializationService {
                 serializedObject = [];
                 for (let i = 0; i < object.length; i++) {
                     const objectElement = object[i];
-                    serializedObject.push(this.serialize(objectElement, target))
+                    serializedObject.push(this.serialize(objectElement, target));
                 }
             } else {
                 // Check if we've already serialized this object. If we have, then output the objects ID instead
@@ -131,7 +131,7 @@ export class SerializationService {
                 deserializedObject = [];
                 for (let i = 0; i < object.length; i++) {
                     const objectElement = object[i];
-                    deserializedObject.push(this.deserialize(objectElement, target))
+                    deserializedObject.push(this.deserialize(objectElement, target));
                 }
             } else {
                 // If the passed value is a number when we're expecting to deserialise an object, it's likely an ID
