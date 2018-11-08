@@ -1,6 +1,5 @@
 import {Constructor} from '../util/constructor';
-import {ICustomSerializer} from '../util/custom-serializer.interface';
-import {Cereal} from '..';
+import {Cereal, ICustomSerializer} from '..';
 
 // tslint:disable-next-line:no-any
 export function Serialize(

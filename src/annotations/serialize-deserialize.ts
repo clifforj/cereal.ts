@@ -1,8 +1,8 @@
 import {Constructor} from '../util/constructor';
-import {ICustomSerializer} from '../util/custom-serializer.interface';
 
 import {Deserialize} from './deserialize';
 import {Serialize} from './serialize';
+import {ICustomSerializer} from "..";
 
 // tslint:disable-next-line:no-any
 export function SerializeDeserialize(
