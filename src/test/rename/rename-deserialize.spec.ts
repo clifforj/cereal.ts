@@ -1,27 +1,26 @@
 import 'mocha';
-import {Deserialize, Cereal} from '../../';
+
 import {expect} from 'chai';
 
-class Person {
-    @Deserialize('first_name') firstName: string;
-    @Deserialize('last_name') lastName: string;
+import {Cereal, Deserialize} from '../../';
 
-    getFullName() {
-        return `${this.firstName} ${this.lastName}`;
-    }
+class Person {
+  @Deserialize('first_name') firstName: string;
+  @Deserialize('last_name') lastName: string;
+
+  getFullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
 }
 
 describe('Renamed Property Deserialization', () => {
-    const bruce = {
-        'first_name': 'Bruce',
-        'last_name': 'Bogtrotter'
-    };
+  const bruce = {'first_name': 'Bruce', 'last_name': 'Bogtrotter'};
 
-    it('should deserialize based on given class', () => {
-        const deserialBruce = Cereal.deserialize(bruce, Person) as Person;
+  it('should deserialize based on given class', () => {
+    const deserialBruce = Cereal.deserialize(bruce, Person) as Person;
 
-        expect(deserialBruce.firstName).to.equal('Bruce');
-        expect(deserialBruce.lastName).to.equal('Bogtrotter');
-        expect(deserialBruce.getFullName()).to.equal('Bruce Bogtrotter');
-    });
+    expect(deserialBruce.firstName).to.equal('Bruce');
+    expect(deserialBruce.lastName).to.equal('Bogtrotter');
+    expect(deserialBruce.getFullName()).to.equal('Bruce Bogtrotter');
+  });
 });

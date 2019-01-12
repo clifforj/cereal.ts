@@ -10,8 +10,7 @@ export class SerializationProperty {
   }
 
   getSerializationMeta() {
-    this.serializationMeta =
-        this.serializationMeta || new SerializationMeta();
+    this.serializationMeta = this.serializationMeta || new SerializationMeta();
     return this.serializationMeta;
   }
 

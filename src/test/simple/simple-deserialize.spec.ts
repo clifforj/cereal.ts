@@ -1,36 +1,38 @@
 import 'mocha';
-import {Deserialize, Cereal} from '../../';
+
 import {expect} from 'chai';
 
+import {Cereal, Deserialize} from '../../';
+
 class Person {
-    @Deserialize() firstName: string;
-    @Deserialize() lastName: string;
+  @Deserialize() firstName: string;
+  @Deserialize() lastName: string;
 
-    constructor(firstName: string, lastName: string) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+  constructor(firstName: string, lastName: string) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
 
-    getFullName() {
-        return `${this.firstName} ${this.lastName}`;
-    }
+  getFullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
 }
 
 describe('Simple Deserialization', () => {
-    const bruce = new Person('Bruce', 'Bogtrotter');
+  const bruce = new Person('Bruce', 'Bogtrotter');
 
-    it('should deserialize based on given class', () => {
-        const deserialBruce = Cereal.deserialize(bruce, Person) as Person;
+  it('should deserialize based on given class', () => {
+    const deserialBruce = Cereal.deserialize(bruce, Person) as Person;
 
-        expect(deserialBruce).to.not.equal(bruce);
-        expect(deserialBruce.firstName).to.equal('Bruce');
-        expect(deserialBruce.lastName).to.equal('Bogtrotter');
-        expect(deserialBruce.getFullName()).to.equal('Bruce Bogtrotter');
-    });
+    expect(deserialBruce).to.not.equal(bruce);
+    expect(deserialBruce.firstName).to.equal('Bruce');
+    expect(deserialBruce.lastName).to.equal('Bogtrotter');
+    expect(deserialBruce.getFullName()).to.equal('Bruce Bogtrotter');
+  });
 
-    it('should just return passed object when no target given', () => {
-        const deserialBruce = Cereal.deserialize(bruce);
+  it('should just return passed object when no target given', () => {
+    const deserialBruce = Cereal.deserialize(bruce);
 
-        expect(deserialBruce).to.equal(bruce);
-    });
+    expect(deserialBruce).to.equal(bruce);
+  });
 });

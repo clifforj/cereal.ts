@@ -1,41 +1,44 @@
 import 'mocha';
-import {Serialize, Cereal, SerializeDeserialize} from '../../';
+
 import {expect} from 'chai';
-import {ICustomSerializer} from "../../util/custom-serializer.interface";
+
+import {Cereal, Serialize, SerializeDeserialize} from '../../';
+import {ICustomSerializer} from '../../util/custom-serializer.interface';
 
 class StringToNumberSerializer implements ICustomSerializer {
-    deserialize(object: number) {
-        if (object || object === 0) {
-            return object.toFixed(0);
-        } else {
-            return undefined;
-        }
+  deserialize(object: number) {
+    if (object || object === 0) {
+      return object.toFixed(0);
+    } else {
+      return undefined;
     }
+  }
 
-    serialize(jsonObject: string): number {
-        if (jsonObject) {
-            return parseInt(jsonObject);
-        } else {
-            return undefined;
-        }
+  serialize(jsonObject: string): number {
+    if (jsonObject) {
+      return +jsonObject;
+    } else {
+      return undefined;
     }
+  }
 }
 const stringToNumberSerializer = new StringToNumberSerializer();
 
 class Person {
-    @SerializeDeserialize() name: string;
-    @SerializeDeserialize(null, stringToNumberSerializer) age: string;
+  @SerializeDeserialize() name: string;
+  @SerializeDeserialize(null, stringToNumberSerializer) age: string;
 
-    constructor(name: string, age: string) {
-        this.name = name;
-        this.age = age;
-    }
+  constructor(name: string, age: string) {
+    this.name = name;
+    this.age = age;
+  }
 }
 
-describe('Object Serialization / Deserialization With Custom Serializer', () => {
-    const bruce = new Person('bruce', '10');
+describe(
+    'Object Serialization / Deserialization With Custom Serializer', () => {
+      const bruce = new Person('bruce', '10');
 
-    it('should serialize age with custom serializer', () => {
+      it('should serialize age with custom serializer', () => {
         const serialBruce = Cereal.serialize(bruce, Person);
 
         expect(serialBruce).to.not.equal(bruce);
@@ -45,5 +48,5 @@ describe('Object Serialization / Deserialization With Custom Serializer', () => 
 
         expect(serialBruce).to.not.equal(deserialBruce);
         expect(deserialBruce.age).to.equal('10');
+      });
     });
-});

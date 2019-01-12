@@ -1,30 +1,30 @@
 import 'mocha';
-import {Serialize, Cereal} from '../../';
+
 import {expect} from 'chai';
-import {ICustomSerializer} from "../../util/custom-serializer.interface";
+
+import {Cereal} from '../../';
 
 class Person {
-    fullName: string;
+  fullName: string;
 
-    static BeforeDeserialized(deserializedObject: Person, originalObject: any) {
-        deserializedObject.fullName = originalObject.title;
-    }
+  // tslint:disable-next-line:no-any
+  static BeforeDeserialized(deserializedObject: Person, originalObject: any) {
+    deserializedObject.fullName = originalObject.title;
+  }
 
-    static AfterDeserialized(deserializedObject: Person, originalObject: any) {
-        deserializedObject.fullName += ` ${originalObject.firstName} ${originalObject.lastName}`;
-    }
+  // tslint:disable-next-line:no-any
+  static AfterDeserialized(deserializedObject: Person, originalObject: any) {
+    deserializedObject.fullName +=
+        ` ${originalObject.firstName} ${originalObject.lastName}`;
+  }
 }
 
 describe('Object Deserialization With Life-cycle Hooks', () => {
-    const bruce = {
-      firstName: 'Bruce',
-      lastName: 'Bogtrotter',
-      title: 'Mr'
-    };
+  const bruce = {firstName: 'Bruce', lastName: 'Bogtrotter', title: 'Mr'};
 
-    it('should have full name added by life-cycle hooks', () => {
-        const deserialBruce = Cereal.deserialize(bruce, Person);
+  it('should have full name added by life-cycle hooks', () => {
+    const deserialBruce = Cereal.deserialize(bruce, Person);
 
-        expect(deserialBruce.fullName).to.equal('Mr Bruce Bogtrotter');
-    });
+    expect(deserialBruce.fullName).to.equal('Mr Bruce Bogtrotter');
+  });
 });

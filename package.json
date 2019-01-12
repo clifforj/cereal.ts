@@ -2,10 +2,10 @@
   "name": "cereal.ts",
   "version": "0.0.1",
   "description": "Serialisation for TypeScript",
-  "main": "build/src/index.js",
-  "types": "build/src/index.d.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "files": [
-    "build/src"
+    "build/"
   ],
   "license": "MIT",
   "keywords": [],
