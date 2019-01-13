@@ -1,6 +1,6 @@
 # Cereal.ts [![Coverage Status](https://coveralls.io/repos/github/clifforj/cereal.ts/badge.svg?branch=master)](https://coveralls.io/github/clifforj/cereal.ts?branch=master) [![Build Status](https://travis-ci.com/clifforj/cereal.ts.svg?branch=master)](https://travis-ci.com/clifforj/cereal.ts/)
 
-![What is this](cereal.jpg)
+![Cereal.ts](https://raw.githubusercontent.com/clifforj/cereal.ts/master/cereal.jpg)
 
 A simple annotation based serialization approach for TypeScript. Supports property renaming, custom serializers, 
 circular references and lifecycle hooks.
