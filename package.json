@@ -8,6 +8,7 @@
     "build/"
   ],
   "license": "MIT",
+  "repository": "https://github.com/clifforj/cereal.ts",
   "keywords": [
     "typescript",
     "serialize",
