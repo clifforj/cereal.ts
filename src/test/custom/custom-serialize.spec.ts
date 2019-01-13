@@ -6,13 +6,9 @@ import {Cereal, Serialize} from '../../';
 import {ICustomSerializer} from '../../util/custom-serializer.interface';
 
 class StringToNumberSerializer implements ICustomSerializer {
-  deserialize(object: number): string {
-    return undefined;
-  }
-
-  serialize(jsonObject: string): number {
-    if (jsonObject) {
-      return +jsonObject;
+  serialize(object: string): number {
+    if (object) {
+      return +object;
     } else {
       return undefined;
     }

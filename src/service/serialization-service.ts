@@ -31,8 +31,8 @@ export class SerializationService {
     return 'serialize' in target || 'deserialize' in target;
   }
 
-  // tslint:disable-next-line:no-any
   static callLifeCycleHook(
+      // tslint:disable-next-line:no-any
       processedObject: any, originalObject: any, target: any,
       wasSerialized: boolean, isAfterHook: boolean) {
     if (isAfterHook) {

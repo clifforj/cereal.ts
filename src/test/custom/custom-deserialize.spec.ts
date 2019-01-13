@@ -6,16 +6,12 @@ import {Cereal, Deserialize} from '../../';
 import {ICustomSerializer} from '../../util/custom-serializer.interface';
 
 class StringToNumberSerializer implements ICustomSerializer {
-  deserialize(object: number) {
-    if (object || object === 0) {
-      return object.toFixed(0);
+  deserialize(jsonObject: number) {
+    if (jsonObject || jsonObject === 0) {
+      return jsonObject.toFixed(0);
     } else {
       return undefined;
     }
-  }
-
-  serialize(): number {
-    return undefined;
   }
 }
 const stringToNumberSerializer = new StringToNumberSerializer();

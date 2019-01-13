@@ -8,7 +8,11 @@
     "build/"
   ],
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+    "typescript",
+    "serialize",
+    "annotations"
+  ],
   "scripts": {
     "test": "nyc --reporter=html mocha -r ts-node/register src/**/*.spec.ts",
     "coverage": "nyc report --reporter=text-lcov | coveralls",

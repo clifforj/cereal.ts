@@ -6,17 +6,17 @@ import {Cereal, Serialize, SerializeDeserialize} from '../../';
 import {ICustomSerializer} from '../../util/custom-serializer.interface';
 
 class StringToNumberSerializer implements ICustomSerializer {
-  deserialize(object: number) {
-    if (object || object === 0) {
-      return object.toFixed(0);
+  deserialize(jsonObject: number) {
+    if (jsonObject || jsonObject === 0) {
+      return jsonObject.toFixed(0);
     } else {
       return undefined;
     }
   }
 
-  serialize(jsonObject: string): number {
-    if (jsonObject) {
-      return +jsonObject;
+  serialize(object: string): number {
+    if (object) {
+      return +object;
     } else {
       return undefined;
     }
